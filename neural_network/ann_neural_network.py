@@ -19,7 +19,7 @@ class NeuralNetwork:
         for i in range(observations): 
             output = input_matrix[i]
             for layer in self.layers: 
-                output = layer.forward_propation(output)
+                output = layer.forward_propagation(output)
             result.append(output)
 
         return result

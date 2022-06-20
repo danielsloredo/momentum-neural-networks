@@ -1,4 +1,4 @@
-from ann_base_class import Layer
+from neural_network.ann_base_class import Layer
 
 class ActivationLayer(Layer):
 
@@ -12,4 +12,4 @@ class ActivationLayer(Layer):
         return self.output
 
     def backward_propagation(self, output_derivative, learning_rate):
-        return self.activation_derivative * output_derivative
+        return self.activation_derivative(self.input) * output_derivative

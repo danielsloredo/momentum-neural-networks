@@ -4,7 +4,7 @@ def mean_squared_error(y_obs, y_pred):
     return np.mean(np.power(y_obs-y_pred, 2))
 
 def mean_squared_error_grad(y_obs, y_pred):
-    return 2 * (y_obs - y_pred)/y_obs.size
+    return 2 * (y_pred - y_obs)/y_obs.size
 
 def cross_entropy(y_obs, y_pred):
     loss=-np.sum(y_obs*np.log(y_pred))

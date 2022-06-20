@@ -1,4 +1,4 @@
-from ann_base_class import Layer
+from neural_network.ann_base_class import Layer
 import numpy as np
 
 class FullyConnectedLayer(Layer): 
