@@ -5,8 +5,17 @@ def sigmoid(x):
     return 1/(1 + np.exp(-x))
 
 def sigmoid_derivative(x):
-    f = 1/(1 + np.exp(-x))
+    f = sigmoid(x)
     return f * (1 - f)
+
+def softmax(x):
+    e_x = np.exp(x)
+    return e_x / e_x.sum()
+
+def softmax_derivative(x):
+    f = softmax(x)
+    d_softmax = (f * np.identity(f.size) - f.transpose() @ f)
+    return d_softmax
 
 def tanh(x):
     return np.tanh(x)
