@@ -24,7 +24,7 @@ class NeuralNetwork:
 
         return result
 
-    def fit(self, x_train, y_train, epochs, learning_rate):
+    def fit_gd(self, x_train, y_train, epochs, learning_rate):
         observations = len(x_train)
 
         for i in range(epochs): 
@@ -46,4 +46,27 @@ class NeuralNetwork:
             objective_val /= observations
 
             print('epoch %d/%d   objective function value = %f' % (i+1, epochs, objective_val))
+    
 
+    def fit_momentum(self, x_train, y_train, epochs, learning_rate, beta_momentum, gamma_momentum):
+        observations = len(x_train)
+
+        for i in range(epochs): 
+            objective_val = 0 
+
+            for j in range(observations): 
+                output = x_train[j]
+
+                for layer in self.layers: 
+                    output = layer.forward_propagation_momentum(output, gamma_momentum)
+
+                objective_val += self.objective(y_train[j], output)
+
+                objective_gradient = self.objective_grad(y_train[j], output)
+
+                for layer in reversed(self.layers):
+                    objective_gradient = layer.backward_propagation_momentum(objective_gradient, learning_rate, beta_momentum)
+
+            objective_val /= observations
+
+            print('epoch %d/%d   objective function value = %f' % (i+1, epochs, objective_val))
