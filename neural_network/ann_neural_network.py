@@ -1,9 +1,9 @@
-
 class NeuralNetwork:
     def __init__(self):
         self.layers = []
         self.objective = None
         self.objective_grad = None
+        self.objective_values = []
 
     def add_layer(self, layer):
         self.layers.append(layer)
@@ -44,6 +44,7 @@ class NeuralNetwork:
                     objective_gradient = layer.backward_propagation(objective_gradient, learning_rate)
 
             objective_val /= observations
+            self.objective_values.append(objective_val)
 
             print('epoch %d/%d   objective function value = %f' % (i+1, epochs, objective_val))
     
@@ -68,5 +69,6 @@ class NeuralNetwork:
                     objective_gradient = layer.backward_propagation_momentum(objective_gradient, learning_rate, beta_momentum)
 
             objective_val /= observations
+            self.objective_values.append(objective_val)
 
             print('epoch %d/%d   objective function value = %f' % (i+1, epochs, objective_val))

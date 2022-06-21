@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 from neural_network.ann_neural_network import NeuralNetwork
 from neural_network.ann_fully_connected_layer import FullyConnectedLayer
@@ -40,3 +41,7 @@ out_2 = model_2.predict(x_train)
 
 print(out)
 print(out_2)
+
+plt.plot(model_1.objective_values, color = 'blue')
+plt.plot(model_2.objective_values, color = 'green')
+plt.show()
