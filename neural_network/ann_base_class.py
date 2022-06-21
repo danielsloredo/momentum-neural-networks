@@ -8,3 +8,11 @@ class Layer:
 
     def backward_propagation(self, output_derivative, learning_rate): 
         raise NotImplementedError 
+
+    def forward_propagation_momentum(self, input_matrix, gamma_momentum):
+        raise NotImplementedError
+
+    def backward_propagation_momentum(self, output_derivative, learning_rate, beta_momentum, gamma_momentum):
+        raise NotImplementedError
+
+    
