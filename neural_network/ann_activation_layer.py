@@ -13,3 +13,11 @@ class ActivationLayer(Layer):
 
     def backward_propagation(self, output_derivative, learning_rate):
         return self.activation_derivative(self.input) * output_derivative
+
+    def forward_propagation_momentum(self, input_matrix, gamma_momentum):
+        self.input = input_matrix
+        self.output = self.activation_function(self.input)
+        return self.output
+
+    def backward_propagation_momentum(self, output_derivative, learning_rate, beta_momentum):
+        return self.activation_derivative(self.input) * output_derivative
