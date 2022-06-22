@@ -8,8 +8,8 @@ from neural_network.ann_activation_functions import sigmoid, sigmoid_derivative,
 from neural_network.ann_objective_functions import mean_squared_error, mean_squared_error_grad
 
 # training data
-x_train = np.array([[[0,0]], [[0,1]], [[1,0]], [[1,1]]])
-y_train = np.array([[[0]], [[1]], [[1]], [[0]]])
+x_train = np.array([[0,0], [0,1], [1,0], [1,1]])
+y_train = np.array([[0], [1], [1], [0]])
 
 # network
 model_1 = NeuralNetwork()
@@ -20,7 +20,7 @@ model_1.add_layer(ActivationLayer(tanh, tanh_derivative))
 
 # train
 model_1.set_objective(mean_squared_error, mean_squared_error_grad)
-model_1.fit_gd(x_train, y_train, epochs=1000, learning_rate=0.1)
+model_1.fit_gd(x_train, y_train, epochs=1000, learning_rate=0.0001)
 
 # test
 out = model_1.predict(x_train)
@@ -34,16 +34,14 @@ model_2.add_layer(ActivationLayer(tanh, tanh_derivative))
 
 # train
 model_2.set_objective(mean_squared_error, mean_squared_error_grad)
-model_2.fit_momentum(x_train, y_train, epochs=1000, learning_rate=0.1, beta_momentum=.9, gamma_momentum=.9)
+model_2.fit_momentum(x_train, y_train, epochs=1000, learning_rate=0.0001, beta_momentum=.9, gamma_momentum=.9)
 
 # test
 out_2 = model_2.predict(x_train)
 
-print(out)
+print(model_1.objective_values)
 print(out_2)
 
 plt.plot(model_1.objective_values, color = 'blue')
 plt.plot(model_2.objective_values, color = 'green')
 plt.show()
-
-print('new branch')
