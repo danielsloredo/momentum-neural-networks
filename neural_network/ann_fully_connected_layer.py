@@ -5,7 +5,7 @@ class FullyConnectedLayer(Layer):
     
     def __init__(self, input_size, output_size, bias = True):
         self.weights = np.random.rand(output_size, input_size) - .5
-        self.weights_extend = np.zeros((output_size, input_size))
+        #self.weights_extend = np.zeros((output_size, input_size))
         self.weights_change = np.zeros((output_size, input_size))
 
         if bias == True:
@@ -13,7 +13,7 @@ class FullyConnectedLayer(Layer):
         else: 
             self.bias = np.zeros((output_size, 1))
         
-        self.bias_extend = np.zeros((output_size, 1))
+        #self.bias_extend = np.zeros((output_size, 1))
         self.bias_change = np.zeros((output_size, 1))
         
     def forward_propagation(self, input_matrix): 
@@ -31,14 +31,14 @@ class FullyConnectedLayer(Layer):
 
     def forward_propagation_momentum(self, input_matrix, gamma_momentum):
         self.input = input_matrix
-        self.weights_extend = self.weights + gamma_momentum * self.weights_change
-        self.bias_extend = self.bias + gamma_momentum * self.bias_change
-        self.output = np.dot(self.weights_extend, self.input) + self.bias_extend
+        self.weights = self.weights + gamma_momentum * self.weights_change
+        self.bias = self.bias + gamma_momentum * self.bias_change
+        self.output = np.dot(self.weights, self.input) + self.bias
         return self.output
 
     def backward_propagation_momentum(self, output_derivative, learning_rate, beta_momentum):
         weights_derivative = np.dot(output_derivative, self.input.T)
-        input_derivative = np.dot(self.weights_extend.T, output_derivative)
+        input_derivative = np.dot(self.weights.T, output_derivative)
 
         self.weights_change = beta_momentum * self.weights_change - learning_rate * weights_derivative
         self.weights = self.weights + self.weights_change
